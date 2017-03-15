@@ -30,6 +30,9 @@
 
 #ifdef _WIN32
 #include <stdlib.h>
+    #if BOOST_PLAT_WINDOWS_RUNTIME
+        #define environ nullptr
+    #endif
 #else
 #include <unistd.h>
 #endif
