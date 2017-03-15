@@ -30,6 +30,9 @@
 
 #ifdef _WIN32
 #include <stdlib.h>
+    #if BOOST_PLAT_WINDOWS_RUNTIME
+        #define environ nullptr
+    #endif
 #else
 #include <unistd.h>
 #endif
@@ -190,7 +193,7 @@ namespace boost { namespace program_options {
                       const function1<std::string, std::string>& name_mapper)
     {
         parsed_options result(&desc);
-        
+       
         for(environment_iterator i(environ), e; i != e; ++i) {
             string option_name = name_mapper(i->first);
 
